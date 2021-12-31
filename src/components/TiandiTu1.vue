@@ -2,19 +2,22 @@
 import { onMounted } from "vue";
 import { Map, View } from "ol";
 import { register } from "ol/proj/proj4";
+import { transform } from "ol/proj";
 import proj4 from "proj4";
 import { getLayer } from "./tianditu";
 
 proj4.defs("EPSG:4490", "+proj=longlat +ellps=GRS80 +no_defs");
 register(proj4);
 
+const center = transform([116.391478, 39.903185], "EPSG:4490", "EPSG:3857");
+
 onMounted(() => {
   const map = new Map({
     target: "map",
     view: new View({
-      center: [116.391478, 39.903185],
-      projection: "EPSG:4490",
-      zoom: 15,
+      center: center, // [116.391478, 39.903185],
+      projection: "EPSG:3857",
+      zoom: 4,
       maxZoom: 18,
       minZoom: 1,
     }),
@@ -26,14 +29,14 @@ onMounted(() => {
     key: "6f6b7b33fd1c3cd2cecac73dae4b54fe",
   });
 
-  // const twoDitu = getLayer({
-  //   type: "影像底图",
-  //   proj: "球面墨卡托投影",
-  //   key: "6f6b7b33fd1c3cd2cecac73dae4b54fe",
-  // });
+  const twoDitu = getLayer({
+    type: "影像底图",
+    proj: "球面墨卡托投影",
+    key: "6f6b7b33fd1c3cd2cecac73dae4b54fe",
+  });
 
   map.addLayer(oneDitu);
-  // map.addLayer(twoDitu);
+  map.addLayer(twoDitu);
 });
 </script>
 

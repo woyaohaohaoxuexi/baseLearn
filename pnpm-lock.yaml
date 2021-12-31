@@ -2,12 +2,14 @@ lockfileVersion: 5.3
 
 specifiers:
   '@vitejs/plugin-vue': ^2.0.0
+  '@vue/compiler-sfc': ^3.2.26
   ol: ^6.10.0
   proj4: ^2.7.5
   vite: ^2.7.2
   vue: ^3.2.25
 
 dependencies:
+  '@vue/compiler-sfc': 3.2.26
   ol: 6.10.0
   proj4: 2.7.5
   vue: 3.2.26
