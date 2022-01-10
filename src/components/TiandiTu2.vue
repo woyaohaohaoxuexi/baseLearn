@@ -6,11 +6,11 @@ import { OSM } from "ol/source";
 import { register } from "ol/proj/proj4";
 import { transform, get } from "ol/proj";
 import proj4 from "proj4";
-import { getLayer } from "./Wgs84";
+import { getLayer } from "./WgsXms";
+import defaultLayer from "./tianditu";
 
-// proj4.defs("EPSG:4490", "+proj=longlat +ellps=GRS80 +no_defs");
-// register(proj4);
-
+proj4.defs("EPSG:4490", "+proj=longlat +ellps=GRS80 +no_defs");
+register(proj4);
 // [120.235061645508, 35.8600616455078], [120.55, 35.9]
 const center = transform(
   [120.635061645508, 36.1900616455078],
@@ -18,7 +18,7 @@ const center = transform(
   "EPSG:3857"
 );
 
-onMounted(() => {
+const init = () => {
   const map = new Map({
     target: "map",
     view: new View({
@@ -30,30 +30,28 @@ onMounted(() => {
     }),
   });
 
-  // const diLayer = new TileLayer({
-  //   source: new OSM(),
-  // });
-
-  const layer = getLayer({
-    proj: "EPSG:4326",
-    layer: "崂山全域dom",
-    matrixSet: "GoogleMapsCompatible",
+  const oneDitu = defaultLayer({
+    type: "矢量底图",
+    proj: "经纬度投影",
+    key: "6f6b7b33fd1c3cd2cecac73dae4b54fe",
   });
 
-  // const oneDitu = getLayer({
-  //   type: "矢量底图",
-  //   proj: "经纬度投影",
-  //   key: "6f6b7b33fd1c3cd2cecac73dae4b54fe",
-  // });
+  map.addLayer(oneDitu);
+  console.log("oneDitu", oneDitu);
 
-  // const twoDitu = getLayer({
-  //   type: "影像底图",
-  //   proj: "球面墨卡托投影",
-  //   key: "6f6b7b33fd1c3cd2cecac73dae4b54fe",
-  // });
-  // map.addLayer(diLayer);
-  console.log("layer", layer);
-  map.addLayer(layer);
+  getLayer({
+    layer: "ter",
+    matrixSet: "c",
+    url: "http://t0.tianditu.gov.cn/ter_c/wmts?request=GetCapabilities&service=wmts",
+    tileUrl: `http://t0.tianditu.gov.cn/ter_c/wmts?tk=6f6b7b33fd1c3cd2cecac73dae4b54fe`,
+  }).then((res) => {
+    console.log("layer", res);
+    map.addLayer(res);
+  });
+};
+
+onMounted(() => {
+  init();
 });
 </script>
 

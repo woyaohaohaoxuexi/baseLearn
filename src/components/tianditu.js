@@ -52,7 +52,7 @@ export const getLayer = (options) => {
     resolutions[z] = width / (256 * Math.pow(2, z));
     matrixIds[z] = z;
   }
-
+  console.log("resolutions", resolutions);
   const wmtsTileGrid = new WMTSGrid({
     origin, // 瓦片坐标系水平方向上的起始点。原点
     resolutions, // 瓦片坐标系各个层级上的分辨率。数组类型，索引跟缩放级别匹配。
@@ -65,7 +65,7 @@ export const getLayer = (options) => {
     }/wmts?tk=${options.key}`,
     layer: layers[options.type],
     version: "1.0.0",
-    matrixSet: matrixSets[options.proj], // 投影坐标系矩阵集，一定要和WMTS capabilities文档中一致，否则会加载失败
+    matrixSet: matrixSets[options.proj], // 图层矩阵集，一定要和WMTS capabilities文档中一致，否则会加载失败
     format: "tiles", // 图片格式
     projection, // 投影坐标系
     requestEncoding: "KVP", // 请求的编码方式，默认就是'KVP'
@@ -79,3 +79,5 @@ export const getLayer = (options) => {
 
   return wmtsLayer;
 };
+
+export default getLayer;

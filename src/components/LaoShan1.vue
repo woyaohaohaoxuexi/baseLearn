@@ -19,23 +19,27 @@ const center = transform(
 );
 
 const init = () => {
-  const map = new Map({
-    target: "map",
-    view: new View({
-      center: center, //[120.55, 35.86], //, // center, //[120.235061645508, 35.8600616455078], // [116.391478, 39.903185],
-      projection: get("EPSG:3857"),
-      zoom: 11,
-      maxZoom: 17,
-      minZoom: 4,
-    }),
-  });
-
   getLayer({
-    layer: "崂山全域dom",
+    layer: "fbce564d-3b25-4b73-b3f9-21e606ab8ea5",
     matrixSet: "GoogleMapsCompatible",
+    url: "http://10.134.65.85:34668/laoshancimMetaSvc/interact/meta/wmts/1.0.0/WMTSCapabilities.xml?id=fa0e33f1-48f1-4d58-9af2-26d45a17b904&model=0",
   }).then((res) => {
     console.log("layer", res);
-    map.add(res);
+
+    if (res) {
+      const map = new Map({
+        target: "map",
+        view: new View({
+          center: center, //[120.55, 35.86], //, // center, //[120.235061645508, 35.8600616455078], // [116.391478, 39.903185],
+          projection: get("EPSG:3857"),
+          zoom: 11,
+          maxZoom: 17,
+          minZoom: 4,
+        }),
+        layers: [res],
+      });
+    }
+    // map.addLayer(res);
   });
 };
 
