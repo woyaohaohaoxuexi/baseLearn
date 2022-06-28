@@ -27,24 +27,27 @@ export const getLayer = (options) => {
   });
 
   const wmtsSource = new WMTSSource({
-    url: "http://10.134.65.85:34668/laoshancimMapSvc/service/map/wmts",
-    layer,
-    version: "1.0.0",
-    matrixSet,
-    projection,
-    requestEncoding: "KVP",
-    format: "image/png",
-    style: "default",
+    // url: "http://10.134.65.85:34668/laoshancimMetasSvcs/interact/meta/wmts/1.0.0/WMTSCapabilities.xml?id=fa0e33f1-48f1-4d58-9af2-26d45a17b904&model=1",
+    url: 'http://10.134.65.85:34668/laoshancimMapSvc/service/map/wmts',
+    // layer,
+    // version: "1.0.0",
+    // matrixSet,
+    // projection,
+    // requestEncoding: "KVP",
+    // format: "image/png",
+    // style: "default",
     tileGrid: wmtsTileGrid,
     // tilePixelRatio: 2,
     tileLoadFunction: function (imageTile, src) {
+      
       src = src
         .replace("TileMatrix", "z")
         .replace("TileCol", "x")
         .replace("TileRow", "y");
       src +=
-        "&token=uQFqT2wITSjTa1TdYyGx0DhN8Z5wIA5Y-v0EOhqN2jndtbBw_NK6kfBdB1RQ8CKEHFK9dwethGbQ199sq7MuE4KB53G3kdOryLYpBSohGZ_XHTjfKOVf6-08UgucfTOwc1CB_lUaLwK4CcyNAdozTs6WYExG1f3bWEiEg8LyXrqxaRSp3UBzhtEccUgJuCEm2CjTLiW-vnWLF1CaP2FCjCGvxKqv7ddj1utanZ-8fTcR9SbmJCOsN28JKNvBC-A5";
+        "&token=uQFqT2wITSjTa1TdYyGx0DhN8Z5wIA5Y-v0EOhqN2jndtbBw_NK6kfBdB1RQ8CKEgEW2_23uohKRtC60A48Cp1ms5PyD3tGCjf6nzZ8iSTwFjs3wch_i-ScqpWECGICbKDZv7-4cXPkSiSYdFwOems6WYExG1f3bWEiEg8LyXrolXFyQpEYzfpY_zykvNdA_Ntl-8nq9Cjx8CacExKIPkBup1rOW3HxC4FCvp4ziwrXpfH1IS_npYqTrtUdpC5NO";
       imageTile.getImage().src = src;
+      console.log('src', src)
     },
   });
 

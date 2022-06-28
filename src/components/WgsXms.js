@@ -23,7 +23,7 @@ export const getLayer = (options) => {
             .replace("TileCol", "x")
             .replace("TileRow", "y");
           src +=
-            "&token=uQFqT2wITSjTa1TdYyGx0DhN8Z5wIA5Y-v0EOhqN2jndtbBw_NK6kfBdB1RQ8CKEHFK9dwethGbQ199sq7MuE4KB53G3kdOryLYpBSohGZ_XHTjfKOVf6-08UgucfTOwc1CB_lUaLwK4CcyNAdozTs6WYExG1f3bWEiEg8LyXrqxaRSp3UBzhtEccUgJuCEm2CjTLiW-vnWLF1CaP2FCjCGvxKqv7ddj1utanZ-8fTcR9SbmJCOsN28JKNvBC-A5";
+            "&token=uQFqT2wITSjTa1TdYyGx0DhN8Z5wIA5Y-v0EOhqN2jndtbBw_NK6kfBdB1RQ8CKEgEW2_23uohKRtC60A48Cp1ms5PyD3tGCjf6nzZ8iSTwFjs3wch_i-ScqpWECGICbKDZv7-4cXPkSiSYdFwOems6WYExG1f3bWEiEg8LyXrolXFyQpEYzfpY_zykvNdA_Ntl-8nq9Cjx8CacExKIPkBup1rOW3HxC4FCvp4ziwrXpfH1IS_npYqTrtUdpC5NO";
           imageTile.getImage().src = src;
         },
       });

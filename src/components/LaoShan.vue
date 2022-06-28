@@ -35,9 +35,9 @@ onMounted(() => {
   // });
 
   const layer = getLayer({
-    proj: "EPSG:4326",
-    layer: "崂山全域dom",
-    matrixSet: "GoogleMapsCompatible",
+    proj: "EPSG:3857",
+    layer: "崂山卫图_标注4",
+    matrixSet: "b01a6d80-0f41-4f1a-927b-95dfa806b4f7",
   });
 
   // const oneDitu = getLayer({
